@@ -13,10 +13,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var controllerPeso =  TextEditingController();
-var controllerAltura = TextEditingController();
+
 double imc = 0;
 bool isCalc = false;
+double peso = 15.0;
+double altura = 1.5;
 
   @override
   Widget build(BuildContext context) {
@@ -37,21 +38,65 @@ bool isCalc = false;
                 child: Center(child: Text("IMC: ${imc.round().toString()}", style: TextStyle(fontSize: 30, color: Colors.white),),)),
              ),
              SizedBox(height: 20,),
-            textCustom(title: "Classificação: ${isCalc ? classificacao(imc) : " "}"),
+                         textCustom(title: "Classificação: ${classificacao(imc).toString()}"),
+
+            //textCustom(title: "Classificação: ${isCalc ? classificacao(imc) : " "}"),
              SizedBox(height: 20,),
             textCustom(title: "Digite o teu peso:"),
-            TextFormField(
-             
-              controller: controllerPeso,
-              keyboardType: TextInputType.number,
-              
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 100),
+              height: 40,
+              width: 80,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.amber),
+              child: Center(child: Text(peso.toStringAsFixed(0), style: const TextStyle(fontSize: 20, color: Colors.white),)),
             ),
+             Slider(value: peso, 
+             min: 10,
+             max: 200,
+             
+                          activeColor: Colors.amber,
+
+             onChanged: (value) {
+             
+              setState(() {
+                 peso = value;
+              });
+              
+            }),
+            // TextFormField(
+             
+            //   controller: controllerPeso,
+            //   keyboardType: TextInputType.number,
+              
+            // ),
                   SizedBox(height: 20,),
             textCustom(title: "Digite a tua altura:"),
-            TextFormField(
-              controller: controllerAltura,
-              keyboardType: TextInputType.phone,
+               Container(
+              margin: EdgeInsets.symmetric(horizontal: 100),
+              height: 40,
+              width: 80,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.amber),
+              child: Center(child: Text(altura.toStringAsFixed(2), style: const TextStyle(fontSize: 20, color: Colors.white),)),
             ),
+            Slider(value: altura, 
+            
+             min: 1,
+             max: 3,
+             activeColor: Colors.amber,
+            onChanged: (value) {
+              
+              
+              
+              setState(() {
+                altura = value;
+              });
+              
+
+            }),
+            // TextFormField(
+            //   controller: controllerAltura,
+            //   keyboardType: TextInputType.phone,
+            // ),
                   SizedBox(height: 20,),
             ElevatedButton(
               
@@ -61,10 +106,10 @@ bool isCalc = false;
              ),
               onPressed: (){
               setState(() {
-                imc = calculaIMC(double.parse(controllerPeso.text), double.parse(controllerAltura.text));
-                controllerAltura.text = '';
-                controllerPeso.text = '';
-                isCalc = !isCalc;
+                debugPrint(altura.toString());
+                imc = calculaIMC(peso, altura);
+              
+                //isCalc = !isCalc;
               });
             }, child: textCustom(title: "Calcular")),
                   
