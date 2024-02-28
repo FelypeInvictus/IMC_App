@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:imc/pages/home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ImcApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ImcApp extends StatelessWidget {
+  const ImcApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        //colorScheme: ColorScheme.fromSeed(seedColor: Colors.amberAccent),
+    
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
